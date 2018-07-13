@@ -5,9 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Cheers For Beers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+     <!-- jQuery -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+     <!-- Bootstrap CDN-->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+ 
+     <!-- CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/styles.css"/>
-    <script src="main.js"></script>
+
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-database.js"></script>
+
 </head>
 <body>
     <div>
@@ -27,7 +41,7 @@
                 <div class="collapse navbar-collapse" id="page-nav-collapse">
                 <ul class="nav navbar-nav ml-auto">
                     <li>
-                    <a class="nav-link" href="advancedSearch.html">Advanced Search</a>
+                    <a class="nav-link" href="favorites.html">Favorites</a>
                     </li>
                     <li>
                     <a class="nav-link" href="pairings.html">Beer Food Pairings</a>
@@ -39,15 +53,18 @@
             <!-- /.container -->
         </nav>
         
-        <h1>Cheers For Beers</h1>
+        <h1>Beer Detectives</h1>
 
-        <h2>Think It, Find It, Drink It</h2>
-        
+        <h2>Think It, Find It, Drink It!</h2>
+
         <form id="beerSearch">
             <input for="beer-input"></input>
             <input id="searchBeer" type="submit" value="Search For Your Beer!">
-
         </form>
+        <a class="advanced-search" href="advancedSearch.html">Advanced Search</a>
     </div>
+
+    <script src="assets/js/app.js"></script>
+
 </body>
 </html>
