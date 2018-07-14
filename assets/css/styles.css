@@ -1,0 +1,28 @@
+body {
+    background-image: url("../images/background.jpg"); 
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+}
+
+body,  #logo, .navbar-light .navbar-nav .nav-link {
+    color: #FDCA45;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #FDCA45;
+    color: white;
+    text-align: center;
+    padding: 1.5%
+}
+
+.nav-link:hover {
+    color: #FDCA45 !important;
+} 
+
+h1 {
+    font-size: 81px;
+}
