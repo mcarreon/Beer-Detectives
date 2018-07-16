@@ -1,0 +1,27 @@
+.desc {
+    /*
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 85%;
+    */
+
+    /* webkit way, needs better solution */
+    -webkit-line-clamp: 4;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    
+}
+
+.beerImage {
+    width: 75%;
+}
+
+body {
+    background-image: url("../images/background.jpg"); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
