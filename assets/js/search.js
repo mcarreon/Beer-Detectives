@@ -1,3 +1,17 @@
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyAoo3LMSf4V3n2IvSshg-JJmDIGv-Flvzw",
+    authDomain: "beerdetectives-becda.firebaseapp.com",
+    databaseURL: "https://beerdetectives-becda.firebaseio.com",
+    projectId: "beerdetectives-becda",
+    storageBucket: "beerdetectives-becda.appspot.com",
+    messagingSenderId: "428567815464"
+};
+firebase.initializeApp(config);
+// Create a variable to reference the database
+var database = firebase.database();
+
+
 //holds data from most recent api call
 var holder = [];
 
