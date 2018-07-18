@@ -115,9 +115,25 @@ var ctrl = {
                 'class': 'beerImage img-thumbnail'
             });
 
-        var sub = $('<div>');
-        sub.attr('class', 'mt-2')
-        sub.html(`<span class="brewery">${holder[cardNum].brewery.brewery_name}</span> | <span class="style">${holder[cardNum].beer.beer_style}</span>`);
+        var subtitle = $('<div>');
+        subtitle.attr('class', 'mt-2')
+        subtitle.html(`<span class="brewery">${holder[cardNum].brewery.brewery_name}</span> | <span class="style">${holder[cardNum].beer.beer_style}</span> <br> <span class="mt-2">Country: ${holder[cardNum].brewery.country_name}</span>`);
+
+        var infoRow = $('<div>');
+        infoRow.attr('class', 'row pl-3 d-flex justify-content-around mt-3 mb-3');
+
+        var abv = $('<div>');
+        abv.html(`ABV: <br> ${holder[cardNum].beer.beer_abv}`);
+        abv.attr('class', 'col-3');
+
+        var ibu = $('<div>');
+        ibu.html(`IBU: <br> ${holder[cardNum].beer.beer_ibu}`);
+        ibu.attr('class', 'col-3');
+
+        var created = $('<div>');
+        created.html(`Date Created: <br> ${holder[cardNum].beer.created_at}`);
+        created.attr('class', 'col-6');
+
 
         var desc = $('<div>');
         desc.text(holder[cardNum].beer.beer_description);
@@ -129,7 +145,7 @@ var ctrl = {
         //creates card -> body -> (col4 -> img) + (col6 -> name, sub, desc) + col2)
         //card.append(body.append(col4.append(img), col6.append(name, sub, desc), col2)); 
         //same but without more info... use until vertical align fixed
-        card.append(body.append(col4.append(img), col6.append(name, sub, desc)));
+        card.append(body.append(col4.append(img), col6.append(name, subtitle, infoRow.append(abv, ibu, created), desc)));
         $('.results-area').append(card);
     }
 
