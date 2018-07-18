@@ -5,6 +5,7 @@ var holder = [];
 var user = {
     search: '',
     results: 10,
+    picked: [],
 }
 
 
@@ -15,6 +16,7 @@ var ctrl = {
         for (var i = 0; i < user.results; i++) {
             var card = $('<div>');
             card.attr('class', 'results-card card h-25 mb-3');
+            card.attr('data-num', i);
     
             var body = $('<div>');
             body.attr('class', 'card-body row');
@@ -66,9 +68,11 @@ var ctrl = {
     clearResults: function () {
         $('.results-area').empty();
     },
-    fillBeerInfo: function () {
+    fillBeerInfo: function (cardNum) {
+        console.log(holder);
+
         var card = $('<div>');
-        card.attr('class', 'info-card card h-25 mb-3');
+        card.attr('class', 'pick-card card mb-3');
     
         var body = $('<div>');
         body.attr('class', 'card-body row');
@@ -87,31 +91,32 @@ var ctrl = {
         //col2.text('more info...');
         var name = $('<div>');
 
-        name.text(holder[i].beer.beer_name);
+        name.text(holder[cardNum].beer.beer_name);
         name.attr('class', 'name');
 
         var img = $('<img>');
         img.attr({
-                'src': holder[i].beer.beer_label,
-                'alt': holder[i].beer.beer_name,
+                'src': holder[cardNum].beer.beer_label,
+                'alt': holder[cardNum].beer.beer_name,
                 'class': 'beerImage img-thumbnail'
             });
 
         var sub = $('<div>');
         sub.attr('class', 'mt-2')
-        sub.html(`<span class="brewery">${holder[i].brewery.brewery_name}</span> | <span class="style">${holder[i].beer.beer_style}</span>`);
+        sub.html(`<span class="brewery">${holder[cardNum].brewery.brewery_name}</span> | <span class="style">${holder[cardNum].beer.beer_style}</span>`);
 
         var desc = $('<div>');
-        desc.text(holder[i].beer.beer_description);
-        if (holder[i].beer.beer_description == "" || holder[i].beer.beer_description == null) {
+        desc.text(holder[cardNum].beer.beer_description);
+        if (holder[cardNum].beer.beer_description == "" || holder[cardNum].beer.beer_description == null) {
                 desc.text('No description...');
         }
-        desc.attr('class', 'desc mt-3');
+        desc.attr('class', 'pick-desc mt-3');
 
         //creates card -> body -> (col4 -> img) + (col6 -> name, sub, desc) + col2)
         //card.append(body.append(col4.append(img), col6.append(name, sub, desc), col2)); 
         //same but without more info... use until vertical align fixed
         card.append(body.append(col4.append(img), col6.append(name, sub, desc)));
+        $('.results-area').append(card);
     }
 
 }
@@ -136,6 +141,7 @@ var ctrl = {
 
 //does not work on enter
 $(document).on('submit', '#beer-search', function () {
+    holder = []; 
     console.log('filling results'); 
     user.search = $('#search-input').val().trim();
     ctrl.clearResults();
@@ -156,9 +162,7 @@ $(document).on('submit', '#beer-search', function () {
             i++;
         }
 
-        ctrl.fillResults();
-        console.log(holder[4]);
-        holder = [];    
+        ctrl.fillResults();   
     });
     
     console.log(holder);
@@ -168,7 +172,10 @@ $(document).on('submit', '#beer-search', function () {
 
 $(document).on('click', '.results-card', function () {
     console.log('test');
+    var BeerNum = $(this).attr('data-num');
     ctrl.clearResults();
+    ctrl.fillBeerInfo(BeerNum);
+    
 });
 
 
