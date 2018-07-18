@@ -1,0 +1,33 @@
+.desc {
+    /*
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 85%;
+    */
+
+    /* webkit way, needs better solution */
+    -webkit-line-clamp: 4;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    
+}
+
+.beerImage {
+    width: 75%;
+}
+
+.navbar-brand, .nav-link, .nav-link {
+    color: #FDCA45!important;
+}
+
+body {
+    background-image: url("../images/background.jpg"); 
+    background-repeat: no-repeat;
+    z-index: 1;
+    background-color: #FDCA45;
+}
+.navbar-toggler-icon {
+}
