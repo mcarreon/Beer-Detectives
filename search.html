@@ -13,52 +13,66 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="index.html">Beer Detectives</a>
-        <button class="navbar-toggler  navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <div class="cont-body">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+            <a class="navbar-brand" href="index.html">Beer Detectives</a>
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#page-nav-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Search
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <!--    Dropdown if needed
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
+            <div class="collapse navbar-collapse" id="page-nav-collapse">
+                <ul class="nav navbar-nav ml-auto mr-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="favorites.html">Favorites</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Search
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="favorites.html">Beer & Food Pairings</a>
+                    </li>
+                    <!--    Dropdown if needed
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                            -->
+                </ul>
+                <!-- Search in navbar
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Your Beer Here" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Quick Search</button>
+                </form>
                 -->
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Your Beer Here" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Quick Search</button>
-            </form>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="input-group mb-3 mt-5">
-            <input type="text" class="form-control" placeholder="Search for a beer!" aria-label="Search area" aria-describedby="search-button" id="search-input">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit" id="search-button">Search</button>
             </div>
-        </div>
-        <div class="results-area">
+        </nav>
+        <div class="container section1">
+            <div class="mb-3 mt-5 pt-5">
+                <form id="beer-search" class="d-block" action="">
+                    <div class="form-group input-group ">
+                        <input type="text" class="form-control" placeholder="Search for a beer!" aria-label="Search area" aria-describedby="search-button" id="search-input">  
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit" id="search-button">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="results-area mt-5">
+            </div>
         </div>
     </div>
 
@@ -70,7 +84,7 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
         crossorigin="anonymous"></script>
-    
+
     <script src="assets/js/search.js"></script>
 </body>
 
