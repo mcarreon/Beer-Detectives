@@ -29,35 +29,13 @@ $(document).ready(function () {
         // Get inputs
         beerName = $("#beer-Name").val().trim();
 
-
         // database.ref().push(Favorites);
         database.ref().push({
             Beer: beerName,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
-        // dataRef.ref().on("child_added", function (childSnapshot) {
-
-        //     // Log everything that's coming out of snapshot
-        //     console.log(childSnapshot.val().beerName);
-
-        //     $("#full-member-list").append("<div class='well'><span class='member-name'> " + childSnapshot.val().name);
-        //     // Handle the errors
-        // }, function (errorObject) {
-        //     console.log("Errors handled: " + errorObject.code);
-        // });
-
-
-        // beerType = $("#beer-Type").val().trim();
-        // locations = $("#location").val().trim();
-
-        // var Favorites ={
-        //     Beer: beerName,
-        //     // Type: beerType,
-        //     // Locations: locations,
-        // }
     })
 });
-
 
 var queryURL = "https://api.punkapi.com/v2/beers/random";
     $.ajax({
@@ -71,7 +49,7 @@ var queryURL = "https://api.punkapi.com/v2/beers/random";
 
         $("#suggestionsDiv").append(beerName, beerType, beerImage);
         
-    };
+    });
 
 // Then use the variables to pull load Favorites from DB
 
