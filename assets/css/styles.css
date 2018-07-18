@@ -2,6 +2,7 @@ body {
     background-image: url("../images/background.jpg"); 
     background-size: 100vw;
     background-repeat: no-repeat;
+    z-index: 1;
 }
 
 body,  #logo, .navbar-light .navbar-nav .nav-link {
@@ -16,7 +17,7 @@ body,  #logo, .navbar-light .navbar-nav .nav-link {
     background-color: #FDCA45;
     color: white;
     text-align: center;
-}
+
 
 
 .nav-link:hover {
