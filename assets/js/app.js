@@ -58,6 +58,21 @@ $(document).ready(function () {
     })
 });
 
+
+var queryURL = "https://api.punkapi.com/v2/beers/random";
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+    
+        var beerName = $("<p>").text(name);
+        var beerType = $("<p>").text(tagline);
+        var beerImage = $("<img>").attr("src", image_url);
+
+        $("#suggestionsDiv").append(beerName, beerType, beerImage);
+        
+    };
+
 // Then use the variables to pull load Favorites from DB
 
 // 
