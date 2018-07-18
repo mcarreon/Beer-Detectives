@@ -21,41 +21,60 @@ var locations = "";
 
 // Click Button changes what is stored in firebase
 $(document).ready(function() {
-    $("").on("click", function(event) {
+    // $("").on("click", function(event) {
 
-    // Prevent the page from refreshing
-        event.preventDefault();
+    // // Prevent the page from refreshing
+    //     event.preventDefault();
         
-        // Get inputs
-        beerName = $("#search-Beer").val().trim();
-        beerType = $("#beer-Type").val().trim();
-        locations = $("#location").val().trim();
+    //     // Get inputs
+    //     beerName = $("#search-Beer").val().trim();
+    //     beerType = $("#beer-Type").val().trim();
+    //     locations = $("#location").val().trim();
     
-        var Favorites ={
-            Beer: beerName,
-            Type: beerType,
-            Locations: locations,
-        }
+    //     var Favorites ={
+    //         Beer: beerName,
+    //         Type: beerType,
+    //         Locations: locations,
+    //     }
 
-        database.ref().push(Favorites);
+    //     database.ref().push(Favorites);
 
-    })
-});  
+    // });
 
-
-var queryURL = "https://api.punkapi.com/v2/beers/random";
-    $.ajax({
+    var queryURL = "https://api.punkapi.com/v2/beers/random";
+    var call1 = $.ajax({
       url: queryURL,
       method: "GET"
-    }).then(function(response) {
+    });
+    var call2 = $.ajax({
+      url: queryURL,
+      method: "GET"
+    });
+    var call3 = $.ajax({
+      url: queryURL,
+      method: "GET"
+    });
     
-        var beerName = $("<p>").text(name);
-        var beerType = $("<p>").text(tagline);
-        var beerImage = $("<img>").attr("src", image_url);
+    $.when(call1, call2, call3)
+    .then(function(response1, response2, response3) {
+        // debugger;
+        var beer = response1[0][0];
+        // var suggestionWrapper = $('<div class="suggestion">')
+        var beerName = $("<p>").text(beer.name);
+        var beerType = $("<p>").text(beer.tagline);
+        var beerImage = $("<img>").attr("src", beer.image_url);
+        var suggestionWrapper = $('<a class="suggestion">');
+        suggestionWrapper.append(beerImage);
 
-        $("#suggestionsDiv").append(beerName, beerType, beerImage);
+
+        // suggestionWrapper.append(beerName, beerType, beerImage);
+        $("#suggestions-div").empty().append(suggestionWrapper).append(suggestionWrapper2);
         
-    };
+    });
 
 // Then use the variables to pull load Favorites from DB
+
+
+});  
+
 
