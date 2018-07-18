@@ -14,7 +14,7 @@ var ctrl = {
     fillResults: function () {
         for (var i = 0; i < user.results; i++) {
             var card = $('<div>');
-            card.attr('class', 'card h-25 mb-3');
+            card.attr('class', 'results-card card h-25 mb-3');
     
             var body = $('<div>');
             body.attr('class', 'card-body row');
@@ -65,6 +65,53 @@ var ctrl = {
     },
     clearResults: function () {
         $('.results-area').empty();
+    },
+    fillBeerInfo: function () {
+        var card = $('<div>');
+        card.attr('class', 'info-card card h-25 mb-3');
+    
+        var body = $('<div>');
+        body.attr('class', 'card-body row');
+    
+        //this col contains the img
+        var col4 = $('<div>');
+        col4.attr('class', 'col-3');
+    
+        //this col contains the desc
+        var col6 = $('<div>');
+        col6.attr('class', 'col-7');
+    
+        //need to move this down
+        //var col2 = $('<div>');
+        //col2.attr('class', 'col-2 more text-right align-text-bottom');            
+        //col2.text('more info...');
+        var name = $('<div>');
+
+        name.text(holder[i].beer.beer_name);
+        name.attr('class', 'name');
+
+        var img = $('<img>');
+        img.attr({
+                'src': holder[i].beer.beer_label,
+                'alt': holder[i].beer.beer_name,
+                'class': 'beerImage img-thumbnail'
+            });
+
+        var sub = $('<div>');
+        sub.attr('class', 'mt-2')
+        sub.html(`<span class="brewery">${holder[i].brewery.brewery_name}</span> | <span class="style">${holder[i].beer.beer_style}</span>`);
+
+        var desc = $('<div>');
+        desc.text(holder[i].beer.beer_description);
+        if (holder[i].beer.beer_description == "" || holder[i].beer.beer_description == null) {
+                desc.text('No description...');
+        }
+        desc.attr('class', 'desc mt-3');
+
+        //creates card -> body -> (col4 -> img) + (col6 -> name, sub, desc) + col2)
+        //card.append(body.append(col4.append(img), col6.append(name, sub, desc), col2)); 
+        //same but without more info... use until vertical align fixed
+        card.append(body.append(col4.append(img), col6.append(name, sub, desc)));
     }
 
 }
@@ -88,7 +135,8 @@ var ctrl = {
 </div> */}
 
 //does not work on enter
-$(document).on('click', '#search-button', function () {
+$(document).on('submit', '#beer-search', function () {
+    console.log('filling results'); 
     user.search = $('#search-input').val().trim();
     ctrl.clearResults();
     console.log(user.search);
@@ -114,6 +162,13 @@ $(document).on('click', '#search-button', function () {
     });
     
     console.log(holder);
+
+    return false;
+});
+
+$(document).on('click', '.results-card', function () {
+    console.log('test');
+    ctrl.clearResults();
 });
 
 
