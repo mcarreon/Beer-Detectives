@@ -21,7 +21,7 @@ var locations = "";
 
 // Click Button changes what is stored in firebase
 $(document).ready(function () {
-    $("#search-Beer").on("click", function (event) {
+    $("#search-button").on("click", function (event) {
 
         // Prevent the page from refreshing
         event.preventDefault();
@@ -35,16 +35,16 @@ $(document).ready(function () {
             Beer: beerName,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
-        dataRef.ref().on("child_added", function (childSnapshot) {
+        // dataRef.ref().on("child_added", function (childSnapshot) {
 
-            // Log everything that's coming out of snapshot
-            console.log(childSnapshot.val().beerName);
+        //     // Log everything that's coming out of snapshot
+        //     console.log(childSnapshot.val().beerName);
 
-            $("#full-member-list").append("<div class='well'><span class='member-name'> " + childSnapshot.val().name);
-            // Handle the errors
-        }, function (errorObject) {
-            console.log("Errors handled: " + errorObject.code);
-        });
+        //     $("#full-member-list").append("<div class='well'><span class='member-name'> " + childSnapshot.val().name);
+        //     // Handle the errors
+        // }, function (errorObject) {
+        //     console.log("Errors handled: " + errorObject.code);
+        // });
 
 
         // beerType = $("#beer-Type").val().trim();
