@@ -1,5 +1,6 @@
 body {
     background-image: url("../images/background.jpg"); 
+    background-size: 100vw;
     background-repeat: no-repeat;
     z-index: 1;
 }
@@ -16,14 +17,59 @@ body,  #logo, .navbar-light .navbar-nav .nav-link {
     background-color: #FDCA45;
     color: white;
     text-align: center;
-    padding: 1.5%;
-    z-index: 2;
-}
+
+
 
 .nav-link:hover {
     color: #FDCA45 !important;
 } 
 
 h1 {
-    font-size: 81px;
+    font-size: 80px;
+    margin-left: 5%;
+}
+
+h2 {
+    margin-left: 5%;
+}
+
+#beerSearch{
+    margin-left: 5%;
+}
+
+.form-control-lg {
+    width: 20%;
+    float: left;
+}
+
+.btn-lg{
+    float: left;
+    margin-left: 0.5%;
+    color: white;
+    background-color: #FDCA45;
+    border-color: #fd9927;
+    border-width: 2.5px;
+}
+
+.btn-lg:hover {
+    background-color: #FDCA45;
+    border-color: #fd9927;
+    border-width: 2.5px;
+}
+
+.btn.btn-primary.btn-lg:active {
+    color: white;
+    background-color: #FDCA45;
+    border-color: #fd9927;
+    border-width: 2.5px;
+}
+
+.advanced-search {
+   float: left;
+   margin-left: -18.25%;
+}
+
+.suggestion img {
+    margin-bottom: 1em;
+    padding: 0px 5% 0px 5%;
 }
