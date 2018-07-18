@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,6 +25,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-database.js"></script>
 
 </head>
+
 <body>
     <div>
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -60,25 +62,32 @@
         <h2>Think It, Find It, Drink It!</h2>
 
         <form id="beerSearch">
-        <input class="form-control form-control-lg" type="text" placeholder="Search">
+            <input class="form-control form-control-lg" id="beer-Name" type="text" placeholder="Search">
         </form>
-        <button type="button" class="btn btn-primary btn-lg">Search for your beer!</button>
+        <button type="button" class="btn btn-primary btn-lg" id="search-Beer"> Search for your beer!</button>
         <br>
         <br>
         <a class="advanced-search" href="advancedSearch.html">Advanced Search</a>
     </div>
 
-  <div class="footer">
-    <p>Check out these suggestions!</p>
-    <a class="suggestion" href="https://placeholder.com"><img src="http://via.placeholder.com/100x100"></a>
-    <a class="suggestion" href="https://placeholder.com"><img src="http://via.placeholder.com/100x100"></a>
-    <a class="suggestion" href="https://placeholder.com"><img src="http://via.placeholder.com/100x100"></a>
-</div>
+    <div class="footer">
+        <p>Check out these suggestions!</p>
+        <a class="suggestion" href="https://placeholder.com">
+            <img src="http://via.placeholder.com/100x100">
+        </a>
+        <a class="suggestion" href="https://placeholder.com">
+            <img src="http://via.placeholder.com/100x100">
+        </a>
+        <a class="suggestion" href="https://placeholder.com">
+            <img src="http://via.placeholder.com/100x100">
+        </a>
+    </div>
 
-     
+
     </div>
 
     <script src="assets/js/app.js"></script>
 
 </body>
+
 </html>
