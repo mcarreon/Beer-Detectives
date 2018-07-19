@@ -70,5 +70,6 @@ h2 {
 
 .suggestion img {
     margin-bottom: 1em;
-    padding: 0px 5% 0px 5%;
+    width: 100px;
+    height: 100px;
 }
