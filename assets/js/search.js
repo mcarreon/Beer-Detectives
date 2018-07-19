@@ -15,11 +15,19 @@ var database = firebase.database();
 //holds data from most recent api call
 var holder = [];
 
+//favorites
+var favoritesList = JSON.parse(localStorage.getItem('favorites'));
+if (!Array.isArray(favoritesList)) {
+    favoritesList = [];
+}
+console.log(favoritesList);
+
 //users search params from firebase ---- should change to local storage?
 var user = {
     search: '',
     results: 10,
     picked: [],
+    favorites: [],
 }
 
 
@@ -31,22 +39,32 @@ var ctrl = {
             var card = $('<div>');
             card.attr('class', 'results-card card h-25 mb-3');
             card.attr('data-num', i);
+            card.attr('beer-id', holder[i].beer.bid);
     
             var body = $('<div>');
             body.attr('class', 'card-body row');
     
             //this col contains the img
             var col4 = $('<div>');
-            col4.attr('class', 'col-3');
+            col4.attr('class', 'col-4');
     
             //this col contains the desc
             var col6 = $('<div>');
-            col6.attr('class', 'col-7');
+            col6.attr('class', 'col-6');
     
             //need to move this down
-            //var col2 = $('<div>');
-            //col2.attr('class', 'col-2 more text-right align-text-bottom');
-            //col2.text('more info...');
+            var col2 = $('<div>');
+            col2.attr('class', 'col-2 d-flex flex-column align-items-start');
+            
+            var more = $('<div>');
+            more.attr('class', 'more');
+            more.text('Click for more info!');
+
+            var fav = $('<i>');
+            fav.attr({
+                'value': `${i}`,
+                'class': 'save-favorite far fa-star mb-auto align-self-end'
+            });
 
             var name = $('<div>');
 
@@ -74,7 +92,7 @@ var ctrl = {
             //creates card -> body -> (col4 -> img) + (col6 -> name, sub, desc) + col2)
             //card.append(body.append(col4.append(img), col6.append(name, sub, desc), col2)); 
             //same but without more info... use until vertical align fixed
-            card.append(body.append(col4.append(img), col6.append(name, sub, desc)));
+            card.append(body.append(col4.append(img), col6.append(name, sub, desc), col2.append(fav, more)));
             //appends results to page
             $('.results-area').append(card);
         }       
@@ -87,6 +105,7 @@ var ctrl = {
 
         var card = $('<div>');
         card.attr('class', 'pick-card card mb-3');
+        card.attr('beer-id', holder[cardNum].beer.bid);
     
         var body = $('<div>');
         body.attr('class', 'card-body row');
@@ -100,9 +119,15 @@ var ctrl = {
         col6.attr('class', 'col-7');
     
         //need to move this down
-        //var col2 = $('<div>');
-        //col2.attr('class', 'col-2 more text-right align-text-bottom');            
-        //col2.text('more info...');
+        var col2 = $('<div>');
+        col2.attr('class', 'col-2 d-flex flex-column align-items-start');
+            
+        var fav = $('<i>');
+        fav.attr({
+            'value': `${cardNum}`,
+            'class': 'save-favorite far fa-star align-self-end'
+        });
+        
         var name = $('<div>');
 
         name.text(holder[cardNum].beer.beer_name);
@@ -145,8 +170,19 @@ var ctrl = {
         //creates card -> body -> (col4 -> img) + (col6 -> name, sub, desc) + col2)
         //card.append(body.append(col4.append(img), col6.append(name, sub, desc), col2)); 
         //same but without more info... use until vertical align fixed
-        card.append(body.append(col4.append(img), col6.append(name, subtitle, infoRow.append(abv, ibu, created), desc)));
+        card.append(body.append(col4.append(img), col6.append(name, subtitle, infoRow.append(abv, ibu, created), desc), col2.append(fav)));
         $('.results-area').append(card);
+    },
+    saveFavorite: function (id) {
+        var beerID = {
+            beerID: id
+        }
+        console.log('saved beerID: ' + beerID);
+        favoritesList.push(beerID);
+        console.log(favoritesList);
+        localStorage.clear();
+        localStorage.setItem('favorites', JSON.stringify(favoritesList));
+        
     }
 
 }
@@ -169,7 +205,7 @@ var ctrl = {
     </div>
 </div> */}
 
-//does not work on enter
+
 $(document).on('submit', '#beer-search', function () {
     holder = []; 
     console.log('filling results'); 
@@ -200,7 +236,12 @@ $(document).on('submit', '#beer-search', function () {
     return false;
 });
 
-$(document).on('click', '.results-card', function () {
+$(document).on('click', '.results-card', function (e) {
+    if ($(e.target).is('i') || $(e.target).is('.col-2')) {
+        e.preventDefault();
+        return;
+    }
+    
     console.log('test');
     var BeerNum = $(this).attr('data-num');
     ctrl.clearResults();
@@ -208,9 +249,11 @@ $(document).on('click', '.results-card', function () {
     
 });
 
-
-
-
+$(document).on('click', '.save-favorite', function () {
+    var beerID = $(this).parent().parent().parent().attr('beer-id');
+    
+    ctrl.saveFavorite(beerID);
+});
 
 function buildUrl() {
     queryUrl2 = "https://api.untappd.com/v4/search/beer?client_id=F304D9673701ED4E38B1409B3A74A162320B4C6E&client_secret=E67EEC5F30623AA6DFB6EB45782C8E62D55E7F30&q=" + user.search;
