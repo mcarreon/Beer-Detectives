@@ -20,12 +20,12 @@ var favoritesList = JSON.parse(localStorage.getItem('favorites'));
 if (!Array.isArray(favoritesList)) {
     favoritesList = [];
 }
-console.log(favoritesList);
+console.log("num of fav: " + favoritesList.length);
 
 //users search params from firebase ---- should change to local storage?
 var user = {
     search: '',
-    results: 10,
+    results: 15,
     picked: [],
     favorites: [],
 }
@@ -34,12 +34,12 @@ var user = {
 //holds search functions
 var ctrl = {
     //fills results, prob setting default to 10
-    fillResults: function () {
-        for (var i = 0; i < user.results; i++) {
+    fillResults: function (array) {
+        for (var i = 0; i < array.length; i++) {
             var card = $('<div>');
             card.attr('class', 'results-card card h-25 mb-3');
             card.attr('data-num', i);
-            card.attr('beer-id', holder[i].beer.bid);
+            card.attr('beer-id', array[i].beer.bid);
     
             var body = $('<div>');
             body.attr('class', 'card-body row');
@@ -57,7 +57,7 @@ var ctrl = {
             col2.attr('class', 'col-2 d-flex flex-column align-items-start');
             
             var more = $('<div>');
-            more.attr('class', 'more');
+            more.attr('class', 'more align-self-end');
             more.text('Click for more info!');
 
             var fav = $('<i>');
@@ -66,25 +66,41 @@ var ctrl = {
                 'class': 'save-favorite far fa-star mb-auto align-self-end'
             });
 
+            // checks if element is already a favorite, and changes star color
+            var exists = false;
+
+            favoritesList.forEach(function (element) {
+                if (element.beerID == array[i].beer.bid) {
+                    exists = true;
+                    return false;
+                }
+            })
+
+            if (exists) {
+                console.log('Found a favorite!');
+                fav.css('color', '#FDCA45');
+            }
+            //  end of check 
+
             var name = $('<div>');
 
-            name.text(holder[i].beer.beer_name);
+            name.text(array[i].beer.beer_name);
             name.attr('class', 'name');
 
             var img = $('<img>');
             img.attr({
-                'src': holder[i].beer.beer_label,
-                'alt': holder[i].beer.beer_name,
+                'src': array[i].beer.beer_label,
+                'alt': array[i].beer.beer_name,
                 'class': 'beerImage img-thumbnail'
             });
 
             var sub = $('<div>');
             sub.attr('class', 'mt-2')
-            sub.html(`<span class="brewery">${holder[i].brewery.brewery_name}</span> | <span class="style">${holder[i].beer.beer_style}</span>`);
+            sub.html(`<span class="brewery">${array[i].brewery.brewery_name}</span> | <span class="style">${array[i].beer.beer_style}</span>`);
 
             var desc = $('<div>');
-            desc.text(holder[i].beer.beer_description);
-            if (holder[i].beer.beer_description == "" || holder[i].beer.beer_description == null) {
+            desc.text(array[i].beer.beer_description);
+            if (array[i].beer.beer_description == "" || array[i].beer.beer_description == null) {
                 desc.text('No description...');
             }
             desc.attr('class', 'desc mt-3');
@@ -100,12 +116,12 @@ var ctrl = {
     clearResults: function () {
         $('.results-area').empty();
     },
-    fillBeerInfo: function (cardNum) {
-        console.log(holder);
+    fillBeerInfo: function ( array, cardNum) {
+        console.log(array);
 
         var card = $('<div>');
         card.attr('class', 'pick-card card mb-3');
-        card.attr('beer-id', holder[cardNum].beer.bid);
+        card.attr('beer-id', array[cardNum].beer.bid);
     
         var body = $('<div>');
         body.attr('class', 'card-body row');
@@ -127,42 +143,58 @@ var ctrl = {
             'value': `${cardNum}`,
             'class': 'save-favorite far fa-star align-self-end'
         });
+
+        // checks if element is already a favorite, and changes star color
+        var exists = false;
+
+        favoritesList.forEach(function (element) {
+            if (element.beerID == array[cardNum].beer.bid) {
+                exists = true;
+                return false;
+            }
+        })
+
+        if (exists) {
+            console.log('Found a favorite!');
+            fav.css('color', '#FDCA45');
+        }
+        //  end of check
         
         var name = $('<div>');
 
-        name.text(holder[cardNum].beer.beer_name);
+        name.text(array[cardNum].beer.beer_name);
         name.attr('class', 'name');
 
         var img = $('<img>');
         img.attr({
-                'src': holder[cardNum].beer.beer_label,
-                'alt': holder[cardNum].beer.beer_name,
+                'src': array[cardNum].beer.beer_label,
+                'alt': array[cardNum].beer.beer_name,
                 'class': 'beerImage img-thumbnail'
             });
 
         var subtitle = $('<div>');
         subtitle.attr('class', 'mt-2')
-        subtitle.html(`<span class="brewery">${holder[cardNum].brewery.brewery_name}</span> | <span class="style">${holder[cardNum].beer.beer_style}</span> <br> <span class="mt-2">Country: ${holder[cardNum].brewery.country_name}</span>`);
+        subtitle.html(`<span class="brewery">${array[cardNum].brewery.brewery_name}</span> | <span class="style">${array[cardNum].beer.beer_style}</span> <br> <span class="mt-2">Country: ${array[cardNum].brewery.country_name}</span>`);
 
         var infoRow = $('<div>');
         infoRow.attr('class', 'row pl-3 d-flex justify-content-around mt-3 mb-3');
 
         var abv = $('<div>');
-        abv.html(`ABV: <br> ${holder[cardNum].beer.beer_abv}`);
+        abv.html(`ABV: <br> ${array[cardNum].beer.beer_abv}`);
         abv.attr('class', 'col-3');
 
         var ibu = $('<div>');
-        ibu.html(`IBU: <br> ${holder[cardNum].beer.beer_ibu}`);
+        ibu.html(`IBU: <br> ${array[cardNum].beer.beer_ibu}`);
         ibu.attr('class', 'col-3');
 
         var created = $('<div>');
-        created.html(`Date Created: <br> ${holder[cardNum].beer.created_at}`);
+        created.html(`Date Created: <br> ${array[cardNum].beer.created_at}`);
         created.attr('class', 'col-6');
 
 
         var desc = $('<div>');
-        desc.text(holder[cardNum].beer.beer_description);
-        if (holder[cardNum].beer.beer_description == "" || holder[cardNum].beer.beer_description == null) {
+        desc.text(array[cardNum].beer.beer_description);
+        if (array[cardNum].beer.beer_description == "" || array[cardNum].beer.beer_description == null) {
                 desc.text('No description...');
         }
         desc.attr('class', 'pick-desc mt-3');
@@ -177,7 +209,7 @@ var ctrl = {
         var beerID = {
             beerID: id
         }
-        console.log('saved beerID: ' + beerID);
+        console.log('saved beerID: ' + beerID.beerID);
         favoritesList.push(beerID);
         console.log(favoritesList);
         localStorage.clear();
@@ -208,10 +240,10 @@ var ctrl = {
 
 $(document).on('submit', '#beer-search', function () {
     holder = []; 
-    console.log('filling results'); 
+    
     user.search = $('#search-input').val().trim();
     ctrl.clearResults();
-    console.log(user.search);
+    console.log('filling results of: ' + user.search); 
 
     var queryUrl = buildUrl();
 
@@ -228,7 +260,7 @@ $(document).on('submit', '#beer-search', function () {
             i++;
         }
 
-        ctrl.fillResults();   
+        ctrl.fillResults(holder);   
     });
     
     console.log(holder);
@@ -245,14 +277,38 @@ $(document).on('click', '.results-card', function (e) {
     console.log('test');
     var BeerNum = $(this).attr('data-num');
     ctrl.clearResults();
-    ctrl.fillBeerInfo(BeerNum);
+    ctrl.fillBeerInfo(holder, BeerNum);
     
 });
 
 $(document).on('click', '.save-favorite', function () {
     var beerID = $(this).parent().parent().parent().attr('beer-id');
     
-    ctrl.saveFavorite(beerID);
+    //checks if beer is not already in local storage
+    if (favoritesList.length != 0) {
+        var exists = false;
+
+        favoritesList.forEach(function (element) {
+            if (element.beerID === beerID) {
+                exists = true;
+            }
+        });
+
+        if (exists === false) {
+            ctrl.saveFavorite(beerID);
+        }     
+    } //if it isnt, add it 
+    else {
+        ctrl.saveFavorite(beerID);
+    }
+    
+    $(this).css({color: '#FDCA45'});
+});
+
+$(document).on('click', '.favorites', function () {
+    ctrl.clearResults();
+    
+    $('.save-favorite').remove();
 });
 
 function buildUrl() {
@@ -267,7 +323,7 @@ $.ajax({
     url: queryUrl,
     method: "GET"
 }).then(function (response) {
-    console.log(response);
+    
 });
 
 
