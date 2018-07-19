@@ -1,3 +1,17 @@
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyAoo3LMSf4V3n2IvSshg-JJmDIGv-Flvzw",
+    authDomain: "beerdetectives-becda.firebaseapp.com",
+    databaseURL: "https://beerdetectives-becda.firebaseio.com",
+    projectId: "beerdetectives-becda",
+    storageBucket: "beerdetectives-becda.appspot.com",
+    messagingSenderId: "428567815464"
+};
+firebase.initializeApp(config);
+// Create a variable to reference the database
+var database = firebase.database();
+
+
 //holds data from most recent api call
 var holder = [];
 
@@ -5,6 +19,7 @@ var holder = [];
 var user = {
     search: '',
     results: 10,
+    picked: [],
 }
 
 
@@ -14,7 +29,8 @@ var ctrl = {
     fillResults: function () {
         for (var i = 0; i < user.results; i++) {
             var card = $('<div>');
-            card.attr('class', 'card h-25 mb-3');
+            card.attr('class', 'results-card card h-25 mb-3');
+            card.attr('data-num', i);
     
             var body = $('<div>');
             body.attr('class', 'card-body row');
@@ -65,6 +81,72 @@ var ctrl = {
     },
     clearResults: function () {
         $('.results-area').empty();
+    },
+    fillBeerInfo: function (cardNum) {
+        console.log(holder);
+
+        var card = $('<div>');
+        card.attr('class', 'pick-card card mb-3');
+    
+        var body = $('<div>');
+        body.attr('class', 'card-body row');
+    
+        //this col contains the img
+        var col4 = $('<div>');
+        col4.attr('class', 'col-3');
+    
+        //this col contains the desc
+        var col6 = $('<div>');
+        col6.attr('class', 'col-7');
+    
+        //need to move this down
+        //var col2 = $('<div>');
+        //col2.attr('class', 'col-2 more text-right align-text-bottom');            
+        //col2.text('more info...');
+        var name = $('<div>');
+
+        name.text(holder[cardNum].beer.beer_name);
+        name.attr('class', 'name');
+
+        var img = $('<img>');
+        img.attr({
+                'src': holder[cardNum].beer.beer_label,
+                'alt': holder[cardNum].beer.beer_name,
+                'class': 'beerImage img-thumbnail'
+            });
+
+        var subtitle = $('<div>');
+        subtitle.attr('class', 'mt-2')
+        subtitle.html(`<span class="brewery">${holder[cardNum].brewery.brewery_name}</span> | <span class="style">${holder[cardNum].beer.beer_style}</span> <br> <span class="mt-2">Country: ${holder[cardNum].brewery.country_name}</span>`);
+
+        var infoRow = $('<div>');
+        infoRow.attr('class', 'row pl-3 d-flex justify-content-around mt-3 mb-3');
+
+        var abv = $('<div>');
+        abv.html(`ABV: <br> ${holder[cardNum].beer.beer_abv}`);
+        abv.attr('class', 'col-3');
+
+        var ibu = $('<div>');
+        ibu.html(`IBU: <br> ${holder[cardNum].beer.beer_ibu}`);
+        ibu.attr('class', 'col-3');
+
+        var created = $('<div>');
+        created.html(`Date Created: <br> ${holder[cardNum].beer.created_at}`);
+        created.attr('class', 'col-6');
+
+
+        var desc = $('<div>');
+        desc.text(holder[cardNum].beer.beer_description);
+        if (holder[cardNum].beer.beer_description == "" || holder[cardNum].beer.beer_description == null) {
+                desc.text('No description...');
+        }
+        desc.attr('class', 'pick-desc mt-3');
+
+        //creates card -> body -> (col4 -> img) + (col6 -> name, sub, desc) + col2)
+        //card.append(body.append(col4.append(img), col6.append(name, sub, desc), col2)); 
+        //same but without more info... use until vertical align fixed
+        card.append(body.append(col4.append(img), col6.append(name, subtitle, infoRow.append(abv, ibu, created), desc)));
+        $('.results-area').append(card);
     }
 
 }
@@ -88,7 +170,9 @@ var ctrl = {
 </div> */}
 
 //does not work on enter
-$(document).on('click', '#search-button', function () {
+$(document).on('submit', '#beer-search', function () {
+    holder = []; 
+    console.log('filling results'); 
     user.search = $('#search-input').val().trim();
     ctrl.clearResults();
     console.log(user.search);
@@ -108,12 +192,20 @@ $(document).on('click', '#search-button', function () {
             i++;
         }
 
-        ctrl.fillResults();
-        console.log(holder[4]);
-        holder = [];    
+        ctrl.fillResults();   
     });
     
     console.log(holder);
+
+    return false;
+});
+
+$(document).on('click', '.results-card', function () {
+    console.log('test');
+    var BeerNum = $(this).attr('data-num');
+    ctrl.clearResults();
+    ctrl.fillBeerInfo(BeerNum);
+    
 });
 
 
