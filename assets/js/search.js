@@ -259,6 +259,15 @@ $(document).on('submit', '#beer-search', function () {
     ctrl.clearResults();
     console.log('filling results of: ' + user.search);
 
+    if(user.search == "") {
+       
+        $("#search-input").addClass("is-invalid");
+        return false;
+    } else {
+        $("#search-input").removeClass("is-invalid");
+    }
+
+
     var queryUrl = buildUrlSearch();
 
     $.ajax({

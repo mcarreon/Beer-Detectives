@@ -69,16 +69,5 @@ $(document).ready(function () {
         
     });
 
-    function checkSearch (form)
-    {
-      // ** START **
-      if (form.search.value == "") {
-        // document.beerSearch.style.background =   'Red'; 
-        form.search.focus();
-        return false ;
-      }
-      // ** END **
-      return true ;
-    }
-
+    
 
