@@ -118,6 +118,7 @@ var ctrl = {
     },
     fillBeerInfo: function (array, cardNum) {
         console.log(array);
+        console.log(cardNum);
 
         var card = $('<div>');
         card.attr('class', 'pick-card card mb-3');
@@ -225,7 +226,7 @@ var ctrl = {
         localStorage.setItem('favorites', JSON.stringify(favoritesList));
 
     },
-    fillFavorite: function (array) {
+    pullSearchFirebase: function () {
 
     }
 
@@ -251,6 +252,11 @@ var ctrl = {
     </div> */
 }
 
+$(document).ready(function () {
+    
+
+
+});
 
 $(document).on('submit', '#beer-search', function () {
     holder = [];
@@ -340,33 +346,36 @@ $(document).on('click', '.favorites', function () {
     console.log('Locally stored favorites: ');
     console.log(storedFavs);
 
+    var outBoundArgs = [];
+
     for (var i = 0; i < storedFavs.length; i++) {
 
         var queryUrl = buildUrlFavorites(storedFavs[i].beerID);
         console.log('query URL for favorites: ' + queryUrl);
 
-        $.ajax({
-            url: queryUrl,
-            method: "GET"
-        }).then(function (data) {
-            user.favorites.push(data.response);
-            console.log('Pushed to user favorites');
-            
-        });
-
-        
-        
-        
+        outBoundArgs.push(
+            $.ajax({
+                url: queryUrl,
+                method: "GET"
+            })
+        );
     }
 
-    $(document).ajaxSuccess(function () {
-        if (user.favorites.length === storedFavs.length) {
-            console.log('user.favorites.length');
+    $.when.apply($, outBoundArgs).then(function () {
+        var args = Array.from(arguments);
+        console.log(args);
+
+        for (var i = 0; i < args.length; i++) {
+            user.favorites.push(args[i][0].response);
+            console.log(user.favorites[i]);
+            ctrl.fillBeerInfo(user.favorites, i);
         }
-    });
+        
         
 
 
+
+    });
 
 });
 
