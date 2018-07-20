@@ -48,6 +48,20 @@
     z-index: 0;
 }
 
+.save-favorite {
+    transition-duration: 2s;
+    font-size: 1.5em;
+}
+
+.save-favorite:hover {
+    color: #FDCA45;
+    transition-duration: 1s;
+}
+
+.more {
+    font-size: .75em;
+}
+
 /* html {
     height: 100%;
 } */
@@ -61,22 +75,22 @@ body {
 
 .results-area::-webkit-scrollbar,
 .results-area::-webkit-scrollbar-track {
-  width: 1px;
-  background: rgba(152, 152, 152, 0);
+    width: 1px;
+    background: rgba(152, 152, 152, 0);
 }
 
 body::-webkit-scrollbar,
 body::-webkit-scrollbar-track {
-  width: 1px;
-  background: rgba(152, 152, 152, 0);
+    width: 1px;
+    background: rgba(152, 152, 152, 0);
 }
 
 body::-webkit-scrollbar-thumb {
-  background: rgba(152, 152, 152, 0.15);
+    background: rgba(152, 152, 152, 0.15);
 }
 
 
 .results-area::-webkit-scrollbar-thumb {
     background: rgba(152, 152, 152, 0.15);
-  }
+}
 
