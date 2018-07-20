@@ -77,9 +77,8 @@ $.when(call1, call2, call3)
     suggestionWrapper3.append(beerImage);
 
     $("#suggestions-div").empty().append(suggestionWrapper).append(suggestionWrapper2).append(suggestionWrapper3);
-    
-});
-
+        
+    });
 
 // Then use the variables to pull load Favorites from DB
 
