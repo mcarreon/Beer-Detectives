@@ -227,7 +227,7 @@ var ctrl = {
 
     },
     pullSearchFirebase: function () {
-        
+
     }
 
 }
@@ -252,6 +252,11 @@ var ctrl = {
     </div> */
 }
 
+$(document).ready(function () {
+    
+
+
+});
 
 $(document).on('submit', '#beer-search', function () {
     holder = [];
