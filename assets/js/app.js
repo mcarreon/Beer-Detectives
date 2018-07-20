@@ -29,11 +29,14 @@ $(document).ready(function () {
         // Get inputs
         beerName = $("#beer-Name").val().trim();
 
-        // database.ref().push(Favorites);
+        database.ref().push(Favorites);
         database.ref().push({
             Beer: beerName,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
+        
+        localStorage.setItem('search-term', beerName);
+
     })
 });
 
