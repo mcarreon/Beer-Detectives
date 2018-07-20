@@ -226,8 +226,8 @@ var ctrl = {
         localStorage.setItem('favorites', JSON.stringify(favoritesList));
 
     },
-    fillFavorite: function (array) {
-
+    pullSearchFirebase: function () {
+        
     }
 
 }
