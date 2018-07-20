@@ -265,6 +265,15 @@ $(document).on('submit', '#beer-search', function () {
     ctrl.clearResults();
     console.log('filling results of: ' + user.search);
 
+    if(user.search == "") {
+       
+        $("#search-input").addClass("is-invalid");
+        return false;
+    } else {
+        $("#search-input").removeClass("is-invalid");
+    }
+
+
     var queryUrl = buildUrlSearch();
 
     $.ajax({
@@ -389,4 +398,21 @@ $.ajax({
     method: "GET"
 }).then(function (response) {
 
+    console.log(response);
 });
+
+
+
+function checkSearch (form)
+{
+  // ** START **
+  if (form.text.value == "") {
+
+    form.text.focus();
+    return false ;
+  }
+  // ** END **
+  return true ;
+}
+
+

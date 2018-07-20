@@ -1,0 +1,250 @@
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cheers For Beers & Food Pairings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Bootstrap CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/styles.css" />
+
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-database.js"></script>
+
+</head>
+
+<body>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+            <a class="navbar-brand" href="index.html">Beer Detectives</a>
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#page-nav-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="page-nav-collapse">
+                <ul class="nav navbar-nav ml-auto mr-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="favorites.html">Favorites</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="search.html">Search
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pairings.html">Beer & Food Pairings</a>
+                    </li>
+                    <!--    Dropdown if needed
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                            -->
+                </ul>
+                <!-- Search in navbar
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Your Beer Here" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Quick Search</button>
+                </form>
+                -->
+            </div>
+        </nav>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="container">
+                <div class="pairings-body">
+                    <section>
+                        <p>Curious about the best beer and food pairings? You're not alone. For centuries, if you asked a restaurant
+                            server in any mid-range to upscale American eatery what drink to pair with a certain dish, he'd
+                            bring over the sommelier and a wine bottle negotiation would ensue. But in the last decade, there's
+                            been a paradigm shift: Beer has made it onto the menu as more than an afterthought.</p>
+
+                        
+                        <p>Here, a list of beer and food pairing menu ideas to help you plan your next dinner party (or what
+                            to order on your next night out!).</p>
+                        <h2>Ale</h2>
+                        <p>
+                            <strong>Pair with:</strong> Burgers; buffalo wings; Asian food; Mexican food; spicy food; nutty food;
+                            fried food; pizza; steaks; Cheddar, Parmesan, or Romano cheeses.</p>
+                        <p>
+                            <strong>Recipes to try:</strong>
+                        </p>
+                        <ul>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/steakburger-with-tangy-caramelized-onions-and-herb-butter">Steakburger with Tangy Caramelized Onions and Herb Butter</a>
+                            </li>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/chicken-coconut-curry-in-a-hurry">Coconut Chicken Curry in a Hurry</a>
+                            </li>
+                        </ul>
+                        <h2>Bock Beer</h2>
+                        <p>
+                            <strong>Pair with:</strong> Gruyère, Emmental, and Swiss cheeses; Cajun food; jerk chicken; beef; sausage;
+                            seared foods.</p>
+                        <p>
+                            <strong>Recipes to try:</strong>
+                        </p>
+                        <ul>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/miss-ollies-grilled-jerk-chicken">Grilled Jerk Chicken</a>
+                            </li>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/grilled-pork-chops-with-pineapple-turmeric-glaze">Grilled Pork Chops with Pineapple-Turmeric Glaze</a>
+                            </li>
+                        </ul>
+                        
+                        <h2>Fruit Beer</h2>
+                        <p>
+                            <strong>Pair with:</strong> Mascarpone cheese; light white meat; foods driven by herbs and spices; duck
+                            and pork dishes with sweet components (avoid very tart lambics); pickled dishes (great with tart
+                            lambics); salads with fruity dressings; fruity desserts.</p>
+                        <p>
+                            <strong>Recipes to try:</strong>
+                        </p>
+                        <ul>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/herb-crusted-cauliflower-steaks-with-beans-and-tomatoes">Herb-Crusted Cauliflower Steaks</a>
+                            </li>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/southern-one-cup-peach-cobbler">Southern One-Cup Peach Cobbler</a>
+                            </li>
+                        </ul>
+                        <h2>Lager Beer</h2>
+                        <p>
+                            <strong>Pair with:</strong> Shellfish; light seafood; sushi; grilled pork and chicken; not-too-heavy
+                            pasta dishes (without cream or meat sauces); Southeast Asian food; Latin food; Mexican food;
+                            spicy food.</p>
+                        <p>
+                            <strong>Recipes to try:</strong>
+                        </p>
+                        <ul>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/greek-style-shrimp-pasta-with-kale">Greek-Style Shrimp Pasta With Kale</a>
+                            </li>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/sheet-pan-crispy-fish-tacos-with-chili-roasted-corn-56390001">Sheet-Pan Crispy Fish Tacos With Chili-Roasted Corn</a>
+                            </li>
+                        </ul>
+                      
+                        <h2>Pilsner Beer</h2>
+                        <p>
+                            <strong>Pair with:</strong> American cheese; Muenster, Havarti, and Monterey Jack cheeses; salads; light
+                            seafood; salmon; tuna; trout; asparagus; Asian food; Mexican food; spicy food.</p>
+                        <p>
+                            <strong>Recipes to try:</strong>
+                        </p>
+                        <ul>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/best-ever-grilled-cheese-51264120">Best-Ever Grilled Cheese</a>
+                            </li>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/lemon-roasted-salmon-with-escarole-asparagus-and-potatoes">Lemon-Roasted Salmon With Escarole, Asparagus, and Potatoes</a>
+                            </li>
+                        </ul>
+                        <h2>Porter Beer</h2>
+                        <p>
+                            <strong>Pair with:</strong> Smoked foods; barbecue; sausage; rich stews; meats; bacon; chili; braised
+                            dishes.</p>
+                        <p>
+                            <strong>Recipes to try:</strong>
+                        </p>
+                        <ul>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/our-favorite-texas-beef-chili-51249010">Our Favorite Texas Beef Chili</a>
+                            </li>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/smoked-chicken-wings">Smoked Chicken Wings</a>
+                            </li>
+                        </ul>
+                        <h2>Stout Beer</h2>
+                        <p>
+                            <strong>Pair with:</strong> Roasted foods; smoked foods; barbecued/grilled foods; salty foods; oysters;
+                            rich stews; braised dishes; chocolate; desserts (ideally the beer is sweeter than the dish).</p>
+                        <p>
+                            <strong>Recipes to try:</strong>
+                        </p>
+                        <ul>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/shawarma-spiced-braised-leg-of-lamb">Shawarma-Spiced Braised Leg of Lamb</a>
+                            </li>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/gingerbread-brownies">Gingerbread Brownies</a>
+                            </li>
+                        </ul>
+                        <h2>Wheat Beer</h2>
+                        <p>
+                            <strong>Pair with:</strong> Light soups and salads; vegetarian dishes; sushi; Gruyère cheese and Feta/goat
+                            cheese; sweet and fruity Asian dishes; citrus-flavored dishes, including dessert and salad dressings.</p>
+                        <p>
+                            <strong>Recipes to try:</strong>
+                        </p>
+                        <ul>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/cheesy-potato-and-kale-gratin-with-rye-croutons">Cheesy Potato and Kale Gratin With Rye Croutons</a>
+                            </li>
+                            <li>
+                                <a href="https://www.epicurious.com/recipes/food/views/grain-bowl-with-spiced-squash-mushrooms-and-curried-yogurt">Grain Bowl With Spiced Squash, Mushrooms, and Curried Yogurt</a>
+                            </li>
+                        </ul>
+                    
+                        <hr class="section-divider">
+                    </section>
+                    <section>
+                        <h2> Tips for Creating Food and Beer Pairings</h2>
+                        <p>Now that you have an idea of what pairs with what, let's explore more. If you want to take a deeper
+                            dive and start creating your own food and beer pairing ideas, here's what to consider.</p>
+                        <h3>Play with Complementary or Contrasting Flavors</h3>
+                        <p>Some chefs and sommeliers attempt to find commonalities, pairing, say, a spicy Thai dish with a spicy
+                            pale ale (could also be a fruit-fruit or chocolate-chocolate synchronization, etc.). The idea
+                            is that there is a pleasant echo. Notes in one sip evoke flavors in past or future bites. The
+                            opposite approach suggests that contrasting flavors are pleasing in a ying-yang sort of way:
+                            A dry, bitter stout classically pairs with oysters, perhaps "cutting through" the sweetness of
+                            the shellfish. Sweet and salty always work wonders. Remember that dominant food flavors can come
+                            from the protein (like beef), the sauce (such as a cream sauce), or the method of preparation
+                            (grilling, for example).</p>
+                        <h3>Beware of Simply Matching the Region</h3>
+                        <p>Many people think if you're having Mexican food, it's a safe bet that a Mexican beer will pair well.
+                            The truth is: Most restaurants offer only a small selection of beers and mostly because that's
+                            what people are used to seeing on a menu. Mexican Tecate, Thai Singha, Indian Kingfisher, and
+                            Chinese Tsingtao are all great European pilsner-style beers, but they're not universal pairing
+                            solutions for all dishes from their respective countries. (Some of these brands are actually
+                            brewed in the U.S. or Canada anyway.) Beer experts advocate stronger and fruitier flavors when
+                            dining on spicy fare: ales, Hefeweizens, and wheat beers in particular. No matter what type of
+                            beer you choose, the coldness will feel good against hot food.</p>
+                        <h3>Drink What You Like</h3>
+                        <p>If you love pale ale, you'll probably like it with anything you eat. And you know what? There's nothing
+                            wrong with that. Experiment: There are no wrong answers.</p>
+                    </section>
+                </div>
+               
+               
+            </div>
+        </div>
+
+</body>
+
+</html>

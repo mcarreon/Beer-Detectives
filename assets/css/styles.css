@@ -62,11 +62,21 @@ h2 {
     border-width: 2.5px;
 }
 
-
 .suggestion img {
     margin-bottom: 1em;
     width: 40px;
     height: 100px;
     margin-left: 50px;
     margin-right: 50px;
+}
+
+.pairings-body {
+    max-height: 100%;
+    align-content: center;
+    overflow: auto;
+    overflow-x: hidden;
+    margin: 10;
+    padding: 10;
+    background:white;
+ 
 }
