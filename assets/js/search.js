@@ -259,7 +259,7 @@ $(document).ready(function () {
 
     ctrl.clearResults();
 
-    if (user.search != '' || user.search != null || user.search != undefined) {
+    if (user.search != '' && user.search != null && user.search != undefined) {
         var queryUrl = buildUrlSearch();
 
         $.ajax({
@@ -277,12 +277,18 @@ $(document).ready(function () {
     
             ctrl.fillResults(holder);
         });
+        
     }
 
+    user.search = '';
+    
+    localStorage.setItem('search-term', user.search);
 });
 
 $(document).on('submit', '#beer-search', function () {
     holder = [];
+
+    user.search = '';
 
     user.search = $('#search-input').val().trim();
     ctrl.clearResults();
@@ -315,6 +321,8 @@ $(document).on('submit', '#beer-search', function () {
     });
 
     console.log(holder);
+
+    user.search = '';
 
     return false;
 });
