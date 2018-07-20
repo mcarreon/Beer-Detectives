@@ -43,9 +43,9 @@ h2 {
 .btn-lg{
     float: left;
     margin-left: 0.5%;
-    color: white;
+    color: black;
     background-color: #FDCA45;
-    border-color: #fd9927;
+    border-color: #fcab42;
     border-width: 2.5px;
 }
 
@@ -58,7 +58,7 @@ h2 {
 .btn.btn-primary.btn-lg:active {
     color: white;
     background-color: #FDCA45;
-    border-color: #fd9927;
+    border-color: #fcab42;
     border-width: 2.5px;
 }
 
