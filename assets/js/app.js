@@ -76,8 +76,6 @@ $(document).ready(function () {
         var suggestionWrapper3 = $('<a class="suggestion">');
         suggestionWrapper3.append(beerImage);
 
-
-        // suggestionWrapper.append(beerName, beerType, beerImage);
         $("#suggestions-div").empty().append(suggestionWrapper).append(suggestionWrapper2).append(suggestionWrapper3);
         
     });
