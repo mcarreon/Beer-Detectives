@@ -80,6 +80,5 @@ $.when(call1, call2, call3)
         
     });
 
-// Then use the variables to pull load Favorites from DB
-
+    
 

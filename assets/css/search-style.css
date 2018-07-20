@@ -44,6 +44,17 @@
     color: #FDCA45!important;
 }
 
+
+.navbar-brand, .navbar-light .navbar-nav .nav-link {
+    font-family: 'Chela One', cursive;
+    font-size: 25px;
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
 .navbar {
     z-index: 0;
 }
