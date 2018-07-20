@@ -71,6 +71,7 @@ body {
     background-color: #FDCA45;
     background-image: url("../images/background.jpg"); 
     background-repeat: no-repeat;
+    
 }
 
 .results-area::-webkit-scrollbar,

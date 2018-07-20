@@ -14,8 +14,14 @@ var database = firebase.database();
 //holds data from most recent api call
 var holder = [];
 
+
 //favorites
-var favoritesList = JSON.parse(localStorage.getItem('favorites'));
+var favoritesList; 
+
+if (localStorage.getItem('favorites') != null && localStorage.getItem('favorites') != '') {
+    JSON.parse(localStorage.getItem('favorites'));
+}
+
 if (!Array.isArray(favoritesList)) {
     favoritesList = [];
 }
@@ -27,6 +33,7 @@ var user = {
     results: 15,
     picked: [],
     favorites: [],
+    favoritesDisplayed: false,
 }
 
 
@@ -369,6 +376,7 @@ $(document).on('click', '.save-favorite', function () {
 $(document).on('click', '.favorites', function () {
     ctrl.clearResults();
     user.favorites = [];
+    user.favoritesDisplayed = true;
 
     $('.save-favorite').remove();
 
@@ -407,6 +415,17 @@ $(document).on('click', '.favorites', function () {
 
     });
 
+});
+
+$(document).on('click', '.reset-favorites', function () {
+    localStorage.setItem('favorites', []);
+    user.favorites = [];
+
+    if (user.favoritesDisplayed) {
+        ctrl.clearResults();
+    }
+
+    user.favoritesDisplayed = false;
 });
 
 function buildUrlSearch() {
