@@ -210,7 +210,7 @@ var ctrl = {
 
             var mapContainer = $('<div>');
             mapContainer.attr('class', 'ml-4');
-            mapContainer.html('<iframe width="75%" height="173.118" class="img-thumbnail" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=' + latitude + '%2C%20' + longitude + '&key=AIzaSyCU5zk4l4cvF6VC9H0Tbd2DDSU8Iz2Si1Y" allowfullscreen></iframe>');
+            mapContainer.html('<iframe width="75%" height="173.118" class="img-thumbnail" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=' + latitude + '%2C%20' + longitude + '&key=' + api.maps + '" allowfullscreen></iframe>');
 
             //handles contact info in center column
             var contactName = $('<div>');
@@ -246,7 +246,7 @@ var ctrl = {
 
             var mapContainer = $('<div>');
             mapContainer.attr('class', 'ml-4');
-            mapContainer.html('<iframe width="75%" height="173.118" class="img-thumbnail" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=' + latitude + '%2C%20' + longitude + '&key=AIzaSyCU5zk4l4cvF6VC9H0Tbd2DDSU8Iz2Si1Y" allowfullscreen></iframe>');
+            mapContainer.html('<iframe width="75%" height="173.118" class="img-thumbnail" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=' + latitude + '%2C%20' + longitude + '&key=' + api.maps + '" allowfullscreen></iframe>');
 
             //handles contact info in center column
             var contactName = $('<div>');
