@@ -56,16 +56,27 @@ $(document).ready(function () {
     .then(function(response1, response2, response3) {
         // debugger;
         var beer = response1[0][0];
-        // var suggestionWrapper = $('<div class="suggestion">')
         var beerName = $("<p>").text(beer.name);
         var beerType = $("<p>").text(beer.tagline);
         var beerImage = $("<img>").attr("src", beer.image_url);
         var suggestionWrapper = $('<a class="suggestion">');
         suggestionWrapper.append(beerImage);
 
+        var beer = response2[0][0];
+        var beerName = $("<p>").text(beer.name);
+        var beerType = $("<p>").text(beer.tagline);
+        var beerImage = $("<img>").attr("src", beer.image_url);
+        var suggestionWrapper2 = $('<a class="suggestion">');
+        suggestionWrapper2.append(beerImage);
 
-        // suggestionWrapper.append(beerName, beerType, beerImage);
-        $("#suggestions-div").empty().append(suggestionWrapper).append(suggestionWrapper2);
+        var beer = response3[0][0];
+        var beerName = $("<p>").text(beer.name);
+        var beerType = $("<p>").text(beer.tagline);
+        var beerImage = $("<img>").attr("src", beer.image_url);
+        var suggestionWrapper3 = $('<a class="suggestion">');
+        suggestionWrapper3.append(beerImage);
+
+        $("#suggestions-div").empty().append(suggestionWrapper).append(suggestionWrapper2).append(suggestionWrapper3);
         
     });
 

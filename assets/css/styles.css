@@ -62,13 +62,11 @@ h2 {
     border-width: 2.5px;
 }
 
-.advanced-search {
-   float: left;
-   margin-left: -18.25%;
-}
 
 .suggestion img {
     margin-bottom: 1em;
-    width: 100px;
+    width: 40px;
     height: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
