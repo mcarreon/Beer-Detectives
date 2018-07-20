@@ -380,4 +380,21 @@ $.ajax({
     method: "GET"
 }).then(function (response) {
 
+    console.log(response);
 });
+
+
+
+function checkSearch (form)
+{
+  // ** START **
+  if (form.text.value == "") {
+
+    form.text.focus();
+    return false ;
+  }
+  // ** END **
+  return true ;
+}
+
+
