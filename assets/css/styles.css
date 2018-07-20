@@ -74,12 +74,13 @@ h2 {
     height: 100px;
 }
 
-.pairing-container {
+.pairings-body {
     max-height: 100%;
-    width:75%;
     align-content: center;
     overflow: auto;
     overflow-x: hidden;
     margin: 10;
     padding: 10;
+    background:white;
+ 
 }

@@ -1,1 +1,2 @@
-# helens-hotwing-house
+Beer Detectives is here to help you find beers you know and those you can discover. 
+To make it all easy, it offers Beer information including name, ABV, description and locale; news from the NY Times, beer and food pairings so you know what to order with your beer for the best combination, and finally a way to save and see your favorites beers.  

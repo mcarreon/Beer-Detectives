@@ -229,4 +229,14 @@ $.ajax({
 
 
 
+function checkSearch (form)
+{
+  // ** START **
+  if (form.text.value == "") {
 
+    form.text.focus();
+    return false ;
+  }
+  // ** END **
+  return true ;
+}
