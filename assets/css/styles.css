@@ -71,12 +71,35 @@ h2 {
 }
 
 .pairings-body {
-    max-height: 100%;
+    max-height: 85vh;
     align-content: center;
     overflow: auto;
     overflow-x: hidden;
     margin: 10;
     padding: 10px;
     background:white;
- 
+
+}
+
+/* Eliminates scroll bar */     
+
+.pairings-body::-webkit-scrollbar,
+.pairings-body::-webkit-scrollbar-track {
+    width: 1px;
+    background: rgba(152, 152, 152, 0);
+}
+
+body::-webkit-scrollbar,
+body::-webkit-scrollbar-track {
+    width: 1px;
+    background: rgba(152, 152, 152, 0);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: rgba(152, 152, 152, 0.15);
+}
+
+
+.pairings-body::-webkit-scrollbar-thumb {
+    background: rgba(152, 152, 152, 0.15);
 }

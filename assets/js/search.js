@@ -11,7 +11,6 @@ firebase.initializeApp(config);
 // Create a variable to reference the database
 var database = firebase.database();
 
-
 //holds data from most recent api call
 var holder = [];
 
@@ -253,20 +252,49 @@ var ctrl = {
 }
 
 $(document).ready(function () {
+    holder = [];
+
+    user.search = localStorage.getItem('search-term');
+    console.log(user.search);
+
+    ctrl.clearResults();
+
+    if (user.search != '' && user.search != null && user.search != undefined) {
+        var queryUrl = buildUrlSearch();
+
+        $.ajax({
+            url: queryUrl,
+            method: "GET"
+        }).then(function (data) {
+            console.log(data);
     
+            var i = 0;
+    
+            while (i < data.response.beers.items.length) {
+                holder.push(data.response.beers.items[i]);
+                i++;
+            }
+    
+            ctrl.fillResults(holder);
+        });
+        
+    }
 
-
+    user.search = '';
+    
+    localStorage.setItem('search-term', user.search);
 });
 
 $(document).on('submit', '#beer-search', function () {
     holder = [];
+
+    user.search = '';
 
     user.search = $('#search-input').val().trim();
     ctrl.clearResults();
     console.log('filling results of: ' + user.search);
 
     if(user.search == "") {
-       
         $("#search-input").addClass("is-invalid");
         return false;
     } else {
@@ -293,6 +321,8 @@ $(document).on('submit', '#beer-search', function () {
     });
 
     console.log(holder);
+
+    user.search = '';
 
     return false;
 });
@@ -390,18 +420,6 @@ function buildUrlFavorites(bid) {
 
     return queryUrl;
 }
-
-var queryUrl = "https://api.punkapi.com/v2/beers?beer_name=red"
-
-$.ajax({
-    url: queryUrl,
-    method: "GET"
-}).then(function (response) {
-
-    console.log(response);
-});
-
-
 
 function checkSearch (form)
 {
