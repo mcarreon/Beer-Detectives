@@ -10,4 +10,4 @@ Hungry? Beer Detective can help with that, we've provided a beer and food pairin
 
 ## But what if I want something organic?
 
-Feeling a bit **stressed**? Check out some of **[this](https://operationb.github.io/THCatalog/)**!
+Feeling a bit **stressed**? Visit the **[doctor](https://operationb.github.io/THCatalog/)**!
