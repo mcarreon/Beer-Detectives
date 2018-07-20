@@ -8,6 +8,6 @@ Move over google, Beer Detective can help find your long lost beer with the powe
 
 Hungry? Beer Detective can help with that, we've provided a beer and food pairing guide.
 
-## But what if I want something organic?
+## Looking for something more holistic?
 
 Feeling a bit **stressed**? Visit the **[doctor](https://operationb.github.io/THCatalog/)**!
