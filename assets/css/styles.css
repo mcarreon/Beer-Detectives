@@ -43,9 +43,9 @@ h2 {
 .btn-lg{
     float: left;
     margin-left: 0.5%;
-    color: white;
+    color: black;
     background-color: #FDCA45;
-    border-color: #fd9927;
+    border-color: #fcab42;
     border-width: 2.5px;
 }
 
@@ -58,7 +58,7 @@ h2 {
 .btn.btn-primary.btn-lg:active {
     color: white;
     background-color: #FDCA45;
-    border-color: #fd9927;
+    border-color: #fcab42;
     border-width: 2.5px;
 }
 
@@ -72,7 +72,7 @@ h2 {
 }
 
 .pairings-body {
-    max-height: 100%;
+    max-height: 85vh;
     align-content: center;
     overflow: auto;
     overflow-x: hidden;
@@ -80,5 +80,27 @@ h2 {
     padding: 10px;
     background:rgba(77, 73, 73, 0.315);
     border-radius: 10;
- 
+}
+
+/* Eliminates scroll bar */     
+
+.pairings-body::-webkit-scrollbar,
+.pairings-body::-webkit-scrollbar-track {
+    width: 1px;
+    background: rgba(152, 152, 152, 0);
+}
+
+body::-webkit-scrollbar,
+body::-webkit-scrollbar-track {
+    width: 1px;
+    background: rgba(152, 152, 152, 0);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: rgba(152, 152, 152, 0.15);
+}
+
+
+.pairings-body::-webkit-scrollbar-thumb {
+    background: rgba(152, 152, 152, 0.15);
 }

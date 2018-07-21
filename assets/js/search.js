@@ -11,12 +11,17 @@ firebase.initializeApp(config);
 // Create a variable to reference the database
 var database = firebase.database();
 
-
 //holds data from most recent api call
 var holder = [];
 
+
 //favorites
-var favoritesList = JSON.parse(localStorage.getItem('favorites'));
+var favoritesList;
+
+if (localStorage.getItem('favorites') != null && localStorage.getItem('favorites') != '') {
+    favoritesList = JSON.parse(localStorage.getItem('favorites'));
+}
+
 if (!Array.isArray(favoritesList)) {
     favoritesList = [];
 }
@@ -28,12 +33,15 @@ var user = {
     results: 15,
     picked: [],
     favorites: [],
+    favoritesDisplayed: false,
 }
 
 
 //holds search functions
+//TODO: compact fill results and fill beerinfo into one function?
 var ctrl = {
     //fills results, prob setting default to 10
+    //handles result cards, and fills result area
     fillResults: function (array) {
         for (var i = 0; i < array.length; i++) {
             var card = $('<div>');
@@ -113,9 +121,13 @@ var ctrl = {
             $('.results-area').append(card);
         }
     },
+    //clears result area
     clearResults: function () {
         $('.results-area').empty();
     },
+    //fills info cards, more in def than fillResults
+    //TODO: package similar code into another function
+    //TODO: add more info ie. contact info
     fillBeerInfo: function (array, cardNum) {
         console.log(array);
         console.log(cardNum);
@@ -173,18 +185,82 @@ var ctrl = {
             'class': 'beerImage img-thumbnail'
         });
 
+        //handles second row for contact info
+        var contactBody = $('<div>');
+        contactBody.attr('class', 'contact-body row mb-3');
+
+        //discerns BID beer info searches, and general beer search as the layout is slightly different
+        //if a favorite
         if (array[cardNum].brewery === undefined || array[cardNum].brewery === null) {
             var subtitle = $('<div>');
-            subtitle.attr('class', 'mt-2')
+            subtitle.attr('class', 'mt-2');
             subtitle.html(`<span class="brewery">${array[cardNum].beer.brewery.brewery_name}</span> | <span class="style">${array[cardNum].beer.beer_style}</span> <br> <span class="mt-2">Country: ${array[cardNum].beer.brewery.country_name}</span>`);
-        } 
+
+            //col contains the map
+            var contactCol3 = $('<div>');
+            contactCol3.attr('class', 'col-3');
+
+            //col contains the contact info
+            var contactCol7 = $('<div>');
+            contactCol7.attr('class', 'col-7 pl-4');
+
+            //handles map in left column
+            var latitude = array[cardNum].beer.brewery.location.lat;
+            var longitude = array[cardNum].beer.brewery.location.lng;
+
+            var mapContainer = $('<div>');
+            mapContainer.attr('class', 'ml-4');
+            mapContainer.html('<iframe width="75%" height="173.118" class="img-thumbnail" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=' + latitude + '%2C%20' + longitude + '&key=' + api.maps + '" allowfullscreen></iframe>');
+
+            //handles contact info in center column
+            var contactName = $('<div>');
+            contactName.attr('class', 'con-name');
+            contactName.text(array[cardNum].beer.brewery.brewery_name);
+
+            var contactSub = $('<div>');
+            contactSub.attr('class', 'con-sub');
+            contactSub.text(`${array[cardNum].beer.brewery.brewery_type} | ${array[cardNum].beer.brewery.country_name}`);
+
+            var contactInfo = $('<div>');
+            contactInfo.attr('class', 'con-info');
+            contactInfo.html(`${array[cardNum].beer.brewery.location.brewery_city}, ${array[cardNum].beer.brewery.location.brewery_state} | Website: <a href="${array[cardNum].beer.brewery.contact.url}" target="_blank">${array[cardNum].beer.brewery.contact.url}</a> `);
+
+
+        } //else if a search
         else {
             var subtitle = $('<div>');
-            subtitle.attr('class', 'mt-2')
+            subtitle.attr('class', 'mt-2');
             subtitle.html(`<span class="brewery">${array[cardNum].brewery.brewery_name}</span> | <span class="style">${array[cardNum].beer.beer_style}</span> <br> <span class="mt-2">Country: ${array[cardNum].brewery.country_name}</span>`);
-        }
 
-        
+            //col contains the map
+            var contactCol3 = $('<div>');
+            contactCol3.attr('class', 'col-3');
+
+            //col contains the contact info
+            var contactCol7 = $('<div>');
+            contactCol7.attr('class', 'col-7 pl-4');
+
+            //handles map in left column
+            var latitude = array[cardNum].brewery.location.lat;
+            var longitude = array[cardNum].brewery.location.lng;
+
+            var mapContainer = $('<div>');
+            mapContainer.attr('class', 'ml-4');
+            mapContainer.html('<iframe width="75%" height="173.118" class="img-thumbnail" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=' + latitude + '%2C%20' + longitude + '&key=' + api.maps + '" allowfullscreen></iframe>');
+
+            //handles contact info in center column
+            var contactName = $('<div>');
+            contactName.attr('class', 'con-name');
+            contactName.text(array[cardNum].brewery.brewery_name);
+
+            var contactSub = $('<div>');
+            contactSub.attr('class', 'con-sub');
+            contactSub.text(`${array[cardNum].brewery.brewery_type} | ${array[cardNum].brewery.country_name}`);
+
+            var contactInfo = $('<div>');
+            contactInfo.attr('class', 'con-info');
+            contactInfo.html(`${array[cardNum].brewery.location.brewery_city}, ${array[cardNum].brewery.location.brewery_state} | Website: <a href="${array[cardNum].brewery.contact.url}" target="_blank">${array[cardNum].brewery.contact.url}</a> `);
+        }
 
         var infoRow = $('<div>');
         infoRow.attr('class', 'row pl-3 d-flex justify-content-around mt-3 mb-3');
@@ -212,9 +288,38 @@ var ctrl = {
         //creates card -> body -> (col4 -> img) + (col6 -> name, sub, desc) + col2)
         //card.append(body.append(col4.append(img), col6.append(name, sub, desc), col2)); 
         //same but without more info... use until vertical align fixed
-        card.append(body.append(col4.append(img), col6.append(name, subtitle, infoRow.append(abv, ibu, created), desc), col2.append(fav)));
+        card.append(
+            body.append(
+                col4.append(
+                    img
+                ),
+                col6.append(
+                    name,
+                    subtitle,
+                    infoRow.append(
+                        abv,
+                        ibu,
+                        created),
+                    desc
+                ),
+                col2.append(
+                    fav
+                )
+            ),
+            contactBody.append(
+                contactCol3.append(
+                    mapContainer
+                ),
+                contactCol7.append(
+                    contactName,
+                    contactSub,
+                    contactInfo
+                )
+            )
+        );
         $('.results-area').append(card);
     },
+    //saves a favorite by taking ID
     saveFavorite: function (id) {
         var beerID = {
             beerID: id
@@ -226,8 +331,40 @@ var ctrl = {
         localStorage.setItem('favorites', JSON.stringify(favoritesList));
 
     },
-    pullSearchFirebase: function () {
+    //fills favorites using BID searches
+    fillFavorites: function () {
 
+        var storedFavs = favoritesList;
+        console.log('Locally stored favorites: ');
+        console.log(storedFavs);
+
+        var outBoundArgs = [];
+
+        for (var i = 0; i < storedFavs.length; i++) {
+
+            var queryUrl = buildUrlFavorites(storedFavs[i].beerID);
+            console.log('query URL for favorites: ' + queryUrl);
+
+            outBoundArgs.push(
+                $.ajax({
+                    url: queryUrl,
+                    method: "GET"
+                })
+            );
+        }
+
+        $.when.apply($, outBoundArgs).then(function () {
+            var args = Array.from(arguments);
+            console.log(args);
+
+            for (var i = 0; i < args.length; i++) {
+                user.favorites.push(args[i][0].response);
+                console.log(user.favorites[i]);
+                ctrl.fillBeerInfo(user.favorites, i);
+            }
+
+            $('.save-favorite').remove();
+        });
     }
 
 }
@@ -252,28 +389,75 @@ var ctrl = {
     </div> */
 }
 
+//handles events where users come from another page to look at their favorites, or have a search from the index
 $(document).ready(function () {
-    
-
-
-});
-
-$(document).on('submit', '#beer-search', function () {
     holder = [];
 
+    user.search = localStorage.getItem('search-term');
+
+    console.log(user.search);
+
+    ctrl.clearResults();
+
+    //if the user search is not empty, then fill results area with their search
+
+    if (user.search != '' && user.search != null && user.search != undefined) {
+        var queryUrl = buildUrlSearch();
+
+        $.ajax({
+            url: queryUrl,
+            method: "GET"
+        }).then(function (data) {
+            console.log(data);
+
+            var i = 0;
+
+            while (i < data.response.beers.items.length) {
+                holder.push(data.response.beers.items[i]);
+                i++;
+            }
+
+            ctrl.fillResults(holder);
+        });
+
+    }
+
+    user.search = '';
+
+
+
+    //detects whether user came from other page, and displays favorites if they have
+    localStorage.setItem('search-term', user.search);
+
+    var redToSearch = localStorage.getItem('toSearchPage');
+
+    if (redToSearch === 'true') {
+
+        ctrl.fillFavorites();
+    }
+
+    localStorage.setItem('toSearchPage', 'false');
+});
+//handles search events
+$(document).on('submit', '#beer-search', function () {
+    holder = [];
+    user.favoritesDisplayed = false;
+    user.search = '';
+
+    //save search
     user.search = $('#search-input').val().trim();
     ctrl.clearResults();
     console.log('filling results of: ' + user.search);
 
-    if(user.search == "") {
-       
+    //validate
+    if (user.search == "") {
         $("#search-input").addClass("is-invalid");
         return false;
     } else {
         $("#search-input").removeClass("is-invalid");
     }
 
-
+    //ajax call to retrieve search results
     var queryUrl = buildUrlSearch();
 
     $.ajax({
@@ -288,15 +472,18 @@ $(document).on('submit', '#beer-search', function () {
             holder.push(data.response.beers.items[i]);
             i++;
         }
-
+        //fills the results
         ctrl.fillResults(holder);
     });
 
     console.log(holder);
 
+    user.search = '';
+
+
     return false;
 });
-
+//refocus on card, and opens to more info
 $(document).on('click', '.results-card', function (e) {
     if ($(e.target).is('i') || $(e.target).is('.col-2')) {
         e.preventDefault();
@@ -309,7 +496,7 @@ $(document).on('click', '.results-card', function (e) {
     ctrl.fillBeerInfo(holder, BeerNum);
 
 });
-
+//saves favorites 
 $(document).on('click', '.save-favorite', function () {
     var beerID = $(this).parent().parent().parent().attr('beer-id');
 
@@ -335,84 +522,48 @@ $(document).on('click', '.save-favorite', function () {
         color: '#FDCA45'
     });
 });
-
+//displays favorites
 $(document).on('click', '.favorites', function () {
     ctrl.clearResults();
     user.favorites = [];
+    user.favoritesDisplayed = true;
 
-    $('.save-favorite').remove();
-
-    var storedFavs = favoritesList;
-    console.log('Locally stored favorites: ');
-    console.log(storedFavs);
-
-    var outBoundArgs = [];
-
-    for (var i = 0; i < storedFavs.length; i++) {
-
-        var queryUrl = buildUrlFavorites(storedFavs[i].beerID);
-        console.log('query URL for favorites: ' + queryUrl);
-
-        outBoundArgs.push(
-            $.ajax({
-                url: queryUrl,
-                method: "GET"
-            })
-        );
-    }
-
-    $.when.apply($, outBoundArgs).then(function () {
-        var args = Array.from(arguments);
-        console.log(args);
-
-        for (var i = 0; i < args.length; i++) {
-            user.favorites.push(args[i][0].response);
-            console.log(user.favorites[i]);
-            ctrl.fillBeerInfo(user.favorites, i);
-        }
-        
-        
-
-
-
-    });
+    ctrl.fillFavorites();
 
 });
+//reset favorites list
+$(document).on('click', '.reset-favorites', function () {
+    localStorage.setItem('favorites', []);
+    user.favorites = [];
+    favoritesList = [];
 
+    if (user.favoritesDisplayed) {
+        ctrl.clearResults();
+    }
+
+    user.favoritesDisplayed = false;
+
+});
+//builds urls for searches
 function buildUrlSearch() {
     var queryUrl2 = "https://api.untappd.com/v4/search/beer?client_id=F304D9673701ED4E38B1409B3A74A162320B4C6E&client_secret=E67EEC5F30623AA6DFB6EB45782C8E62D55E7F30&q=" + user.search;
 
     return queryUrl2;
 }
-
+//buidls urls for search by ID
 function buildUrlFavorites(bid) {
     var queryUrl = "https://api.untappd.com/v4/beer/info/" + bid + "?client_id=F304D9673701ED4E38B1409B3A74A162320B4C6E&client_secret=E67EEC5F30623AA6DFB6EB45782C8E62D55E7F30";
 
     return queryUrl;
 }
 
-var queryUrl = "https://api.punkapi.com/v2/beers?beer_name=red"
+function checkSearch(form) {
+    // ** START **
+    if (form.text.value == "") {
 
-$.ajax({
-    url: queryUrl,
-    method: "GET"
-}).then(function (response) {
-
-    console.log(response);
-});
-
-
-
-function checkSearch (form)
-{
-  // ** START **
-  if (form.text.value == "") {
-
-    form.text.focus();
-    return false ;
-  }
-  // ** END **
-  return true ;
+        form.text.focus();
+        return false;
+    }
+    // ** END **
+    return true;
 }
-
-
