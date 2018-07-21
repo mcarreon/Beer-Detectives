@@ -425,6 +425,7 @@ $(document).ready(function () {
     user.search = '';
 
 
+
     //detects whether user came from other page, and displays favorites if they have
     localStorage.setItem('search-term', user.search);
 
@@ -541,6 +542,7 @@ $(document).on('click', '.reset-favorites', function () {
     }
 
     user.favoritesDisplayed = false;
+
 });
 //builds urls for searches
 function buildUrlSearch() {

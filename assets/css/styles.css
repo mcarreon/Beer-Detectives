@@ -1,5 +1,5 @@
 body {
-    background-image: url("../images/background.jpg"); 
+    background-image: url("../images/background.jpg");     
     background-repeat: no-repeat;
 }
 
@@ -62,6 +62,7 @@ h2 {
     border-width: 2.5px;
 }
 
+
 .suggestion img {
     margin-bottom: 1em;
     width: 40px;
@@ -75,10 +76,10 @@ h2 {
     align-content: center;
     overflow: auto;
     overflow-x: hidden;
-    margin: 10;
+    margin: 10px;
     padding: 10px;
-    background:white;
-
+    background:rgba(77, 73, 73, 0.315);
+    border-radius: 10;
 }
 
 /* Eliminates scroll bar */     
