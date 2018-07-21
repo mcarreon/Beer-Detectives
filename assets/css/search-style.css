@@ -36,6 +36,31 @@
     overflow-x: hidden;
 }
 
+.results-card {
+    background-color: rgba(24, 24, 24, 0.884);
+    
+}
+
+.pick-card {
+    background-color: rgb(24, 24, 24);
+}
+
+#search-button {
+    background-color: #FDCA45;
+    border-color: #fcab42;
+    border-width: 2.5px;
+    color: black;
+}
+
+#search-button:hover {
+    color: white;
+}
+
+.results-card:hover {
+    background:rgb(24, 24, 24);
+    
+}
+
 .section1 {
     height: 100%;
 }
@@ -45,12 +70,13 @@
 }
 
 .navbar {
-    z-index: 0;
+    z-index: 1;
 }
 
 .save-favorite {
     transition-duration: 2s;
     font-size: 1.5em;
+    color: black;
 }
 
 .save-favorite:hover {
@@ -71,6 +97,7 @@ body {
     background-color: #FDCA45;
     background-image: url("../images/background.jpg"); 
     background-repeat: no-repeat;
+    color: #FDCA45;
 }
 
 .results-area::-webkit-scrollbar,

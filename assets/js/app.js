@@ -21,19 +21,23 @@ var locations = "";
 
 // Click Button changes what is stored in firebase
 $(document).ready(function () {
-    $("#search-button").on("click", function (event) {
+    $(document).on("click", "#search-button", function (event) {
 
         // Prevent the page from refreshing
         event.preventDefault();
 
         // Get inputs
         beerName = $("#beer-Name").val().trim();
+        localStorage.setItem('search-term', beerName);
 
-        // database.ref().push(Favorites);
+        //database.ref().push(Favorites);
         database.ref().push({
             Beer: beerName,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
+        
+        
+
     })
 });
 
