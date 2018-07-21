@@ -93,7 +93,7 @@ var ctrl = {
             var name = $('<div>');
 
             name.text(array[i].beer.beer_name);
-            name.attr('class', 'name');
+            name.attr('class', 'name large');
 
             var img = $('<img>');
             img.attr({
@@ -104,7 +104,7 @@ var ctrl = {
 
             var sub = $('<div>');
             sub.attr('class', 'mt-2')
-            sub.html(`<span class="brewery">${array[i].brewery.brewery_name}</span> | <span class="style">${array[i].beer.beer_style}</span>`);
+            sub.html(`<span class="brewery medium">${array[i].brewery.brewery_name}</span> | <span class="style">${array[i].beer.beer_style}</span>`);
 
             var desc = $('<div>');
             desc.text(array[i].beer.beer_description);
@@ -176,7 +176,7 @@ var ctrl = {
         var name = $('<div>');
 
         name.text(array[cardNum].beer.beer_name);
-        name.attr('class', 'name');
+        name.attr('class', 'name large');
 
         var img = $('<img>');
         img.attr({
@@ -193,7 +193,7 @@ var ctrl = {
         //if a favorite
         if (array[cardNum].brewery === undefined || array[cardNum].brewery === null) {
             var subtitle = $('<div>');
-            subtitle.attr('class', 'mt-2');
+            subtitle.attr('class', 'medium');
             subtitle.html(`<span class="brewery">${array[cardNum].beer.brewery.brewery_name}</span> | <span class="style">${array[cardNum].beer.beer_style}</span> <br> <span class="mt-2">Country: ${array[cardNum].beer.brewery.country_name}</span>`);
 
             //col contains the map
@@ -214,7 +214,7 @@ var ctrl = {
 
             //handles contact info in center column
             var contactName = $('<div>');
-            contactName.attr('class', 'con-name');
+            contactName.attr('class', 'con-name medium');
             contactName.text(array[cardNum].beer.brewery.brewery_name);
 
             var contactSub = $('<div>');
@@ -229,7 +229,7 @@ var ctrl = {
         } //else if a search
         else {
             var subtitle = $('<div>');
-            subtitle.attr('class', 'mt-2');
+            subtitle.attr('class', 'medium');
             subtitle.html(`<span class="brewery">${array[cardNum].brewery.brewery_name}</span> | <span class="style">${array[cardNum].beer.beer_style}</span> <br> <span class="mt-2">Country: ${array[cardNum].brewery.country_name}</span>`);
 
             //col contains the map
@@ -250,7 +250,7 @@ var ctrl = {
 
             //handles contact info in center column
             var contactName = $('<div>');
-            contactName.attr('class', 'con-name');
+            contactName.attr('class', 'con-name medium');
             contactName.text(array[cardNum].brewery.brewery_name);
 
             var contactSub = $('<div>');
@@ -263,14 +263,14 @@ var ctrl = {
         }
 
         var infoRow = $('<div>');
-        infoRow.attr('class', 'row pl-3 d-flex justify-content-around mt-3 mb-3');
+        infoRow.attr('class', 'row d-flex justify-content-around mt-3 mb-3');
 
         var abv = $('<div>');
-        abv.html(`ABV: <br> ${array[cardNum].beer.beer_abv}`);
+        abv.html(`ABV: ${array[cardNum].beer.beer_abv}`);
         abv.attr('class', 'col-3');
 
         var ibu = $('<div>');
-        ibu.html(`IBU: <br> ${array[cardNum].beer.beer_ibu}`);
+        ibu.html(`IBU: ${array[cardNum].beer.beer_ibu}`);
         ibu.attr('class', 'col-3');
 
         var created = $('<div>');

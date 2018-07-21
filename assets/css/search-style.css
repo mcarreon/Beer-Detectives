@@ -36,14 +36,11 @@
     overflow-x: hidden;
 }
 
-.results-card {
-    background-color: rgba(24, 24, 24, 0.884);
-    
+.results-card, .pick-card {
+    background-color: rgba(255, 253, 253, 0.22);
+    color: white;
 }
 
-.pick-card {
-    background-color: rgb(24, 24, 24);
-}
 
 #search-button {
     background-color: #FDCA45;
@@ -57,7 +54,7 @@
 }
 
 .results-card:hover {
-    background:rgb(24, 24, 24);
+    background-color: rgba(255, 253, 253, 0.26);
     
 }
 
@@ -86,6 +83,14 @@
 
 .more {
     font-size: .75em;
+}
+
+.large {
+    font-size: 1.5em;
+}
+
+.medium {
+    font-size: 1.25em;
 }
 
 /* html {
