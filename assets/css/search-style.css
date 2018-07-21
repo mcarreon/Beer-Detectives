@@ -36,14 +36,11 @@
     overflow-x: hidden;
 }
 
-.results-card {
-    background-color: rgba(24, 24, 24, 0.884);
-    
+.results-card, .pick-card {
+    background-color: rgba(255, 253, 253, 0.22);
+    color: white;
 }
 
-.pick-card {
-    background-color: rgb(24, 24, 24);
-}
 
 #search-button {
     background-color: #FDCA45;
@@ -57,7 +54,7 @@
 }
 
 .results-card:hover {
-    background:rgb(24, 24, 24);
+    background-color: rgba(255, 253, 253, 0.26);
     
 }
 
@@ -88,11 +85,24 @@
     font-size: .75em;
 }
 
+.large {
+    font-size: 1.5em;
+}
+
+.medium {
+    font-size: 1.25em;
+}
+
 /* html {
     height: 100%;
 } */
+.navbar-brand, .navbar-light .navbar-nav .nav-link {
+    font-family: 'Chela One', cursive;
+    font-size: 25px;
+}
 
 body {
+    font-family: 'Poppins', sans-serif;
     /* min-height: 100%; */
     background-color: #FDCA45;
     background-image: url("../images/background.jpg"); 
